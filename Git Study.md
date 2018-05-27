@@ -2435,7 +2435,7 @@ Git虽然极其强大，命令繁多，但常用的就那么十来个，掌握�
 
 友情附赠国外网友制作的Git Cheat Sheet，建议打印出来备用：
 
-[Git Cheat Sheet](https://pan.baidu.com/s/4eUjQ3vG)
+[Git Cheat Sheet](https://pan.baidu.com/s/1S2sNSWC23kU4uM1jAsiPBA)
 
 现在告诉你Git的官方网站：http://git-scm.com，英文自我感觉不错的童鞋，可以经常去官网看看。什么，打不开网站？相信我，我给出的绝对是官网地址，而且，Git官网决没有那么容易宕机，可能是你的人品问题，赶紧面壁思过，好好想想原因。
 
