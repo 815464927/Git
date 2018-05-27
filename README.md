@@ -1,2 +1,2 @@
-# this is README
+# README
 * 123
