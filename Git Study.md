@@ -50,7 +50,9 @@ Git迅速成为最流行的分布式版本控制系统，尤其是2008年，GitH
 那分布式版本控制系统与集中式版本控制系统有何不同呢？首先，分布式版本控制系统根本没有“中央服务器”，每个人的电脑上都是一个完整的版本库，这样，你工作的时候，就不需要联网了，因为版本库就在你自己的电脑上。既然每个人电脑上都有一个完整的版本库，那多个人如何协作呢？比方说你在自己电脑上改了文件A，你的同事也在他的电脑上改了文件A，这时，你们俩之间只需把各自的修改推送给对方，就可以互相看到对方的修改了。
 和集中式版本控制系统相比，分布式版本控制系统的安全性要高很多，因为每个人电脑里都有完整的版本库，某一个人的电脑坏掉了不要紧，随便从其他人那里复制一个就可以了。而集中式版本控制系统的中央服务器要是出了问题，所有人都没法干活了。
 在实际使用分布式版本控制系统的时候，其实很少在两人之间的电脑上推送版本库的修改，因为可能你们俩不在一个局域网内，两台电脑互相访问不了，也可能今天你的同事病了，他的电脑压根没有开机。因此，分布式版本控制系统通常也有一台充当“中央服务器”的电脑，但这个服务器的作用仅仅是用来方便“交换”大家的修改，没有它大家也一样干活，只是交换修改不方便而已。
+
 ![这里写图片描述](https://img-blog.csdn.net/20180527221852398?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1NvbmdfNzQxMTA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+
 当然，Git的优势不单是不必联网这么简单，后面我们还会看到Git极其强大的分支管理，把SVN等远远抛在了后面。
 
 CVS作为最早的开源而且免费的集中式版本控制系统，直到现在还有不少人在用。由于CVS自身设计的问题，会造成提交文件不完整，版本库莫名其妙损坏的情况。同样是开源而且免费的SVN修正了CVS的一些稳定性问题，是目前用得最多的集中式版本库控制系统。
@@ -377,9 +379,13 @@ Git is a distributed version control system.
 Git is free software distributed under the GPL.
 ```
 Git的版本回退速度非常快，因为Git在内部有个指向当前版本的HEAD指针，当你回退版本的时候，Git仅仅是把HEAD从指向append GPL：
+
 ![这里写图片描述](https://img-blog.csdn.net/20180527224628359?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1NvbmdfNzQxMTA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+
 改为指向add distributed：
+
 ![这里写图片描述](https://img-blog.csdn.net/20180527224657162?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1NvbmdfNzQxMTA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+
 然后顺便把工作区的文件更新了。所以你让HEAD指向哪个版本号，你就把当前版本定位在哪。
 
 现在，你回退到了某个版本，关掉了电脑，第二天早上就后悔了，想恢复到新版本怎么办？找不到新版本的commit id怎么办？
@@ -414,7 +420,9 @@ Git和其他版本控制系统如SVN的一个不同之处就是有暂存区的�
 工作区有一个隐藏目录.git，这个不算工作区，而是Git的版本库。
 
 Git的版本库里存了很多东西，其中最重要的就是称为stage（或者叫index）的暂存区，还有Git为我们自动创建的第一个分支master，以及指向master的一个指针叫HEAD。
+
 ![这里写图片描述](https://img-blog.csdn.net/20180527225025326?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1NvbmdfNzQxMTA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+
 分支和HEAD的概念我们以后再讲。
 
 前面讲了我们把文件往Git版本库里添加的时候，是分两步执行的：
@@ -468,7 +476,9 @@ Changes to be committed:
     modified:   readme.txt
 ```
 现在，暂存区的状态就变成这样了：
+
 ![](https://img-blog.csdn.net/20180527225205329?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1NvbmdfNzQxMTA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+
 所以，git add命令实际上就是把要提交的所有修改放到暂存区（Stage），然后，执行git commit就可以一次性把暂存区的所有修改提交到分支。
 
 ```
@@ -485,7 +495,9 @@ On branch master
 nothing to commit, working tree clean
 ```
 现在版本库变成了这样，暂存区就没有任何内容了：
+
 ![这里写图片描述](https://img-blog.csdn.net/2018052722540229?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1NvbmdfNzQxMTA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+
 
 * 小结
 
@@ -928,7 +940,7 @@ README.md
 ```
 如果有多个人协作开发，那么每个人各自从远程克隆一份就可以了。
 
-你也许还注意到，GitHub给出的地址不止一个，还可以用https://github.com/michaelliao/gitskills.git这样的地址。实际上，Git支持多种协议，默认的git://使用ssh，但也可以使用https等其他协议。
+你也许还注意到，GitHub给出的地址不止一个，还可以用https://github.com/michaelliao/gitskills.git 这样的地址。实际上，Git支持多种协议，默认的git:// 使用ssh， 但也可以使用https等其他协议。
 
 使用https除了速度慢以外，还有个最大的麻烦是每次推送都必须输入口令，但是在某些只开放http端口的公司内部就无法使用ssh协议而只能用https。
 
@@ -942,7 +954,9 @@ Git支持多种协议，包括https，但通过ssh支持的原生git协议速度
 分支就是科幻电影里面的平行宇宙，当你正在电脑前努力学习Git的时候，另一个你正在另一个平行宇宙里努力学习SVN。
 
 如果两个平行宇宙互不干扰，那对现在的你也没啥影响。不过，在某个时间点，两个平行宇宙合并了，结果，你既学会了Git又学会了SVN
+
 ![这里写图片描述](https://img-blog.csdn.net/20180527231616774?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1NvbmdfNzQxMTA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+
 分支在实际中有什么用呢？假设你准备开发一个新功能，但是需要两周才能完成，第一周你写了50%的代码，如果立刻提交，由于代码还没写完，不完整的代码库会导致别人不能干活了。如果等代码全部写完再一次提交，又存在丢失每天进度的巨大风险。
 
 现在有了分支，就不用怕了。你创建了一个属于你自己的分支，别人看不到，还继续在原来的分支上正常工作，而你在自己的分支上干活，想提交就提交，直到开发完毕后，再一次性合并到原来的分支上，这样，既安全，又不影响别人工作。
@@ -956,20 +970,30 @@ Git支持多种协议，包括https，但通过ssh支持的原生git协议速度
 在版本回退里，你已经知道，每次提交，Git都把它们串成一条时间线，这条时间线就是一个分支。截止到目前，只有一条时间线，在Git里，这个分支叫主分支，即master分支。HEAD严格来说不是指向提交，而是指向master，master才是指向提交的，所以，HEAD指向的就是当前分支。
 
 一开始的时候，master分支是一条线，Git用master指向最新的提交，再用HEAD指向master，就能确定当前分支，以及当前分支的提交点：
+
 ![这里写图片描述](https://img-blog.csdn.net/20180527231739512?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1NvbmdfNzQxMTA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+
 每次提交，master分支都会向前移动一步，这样，随着你不断提交，master分支的线也越来越长，
 当我们创建新的分支，例如dev时，Git新建了一个指针叫dev，指向master相同的提交，再把HEAD指向dev，就表示当前分支在dev上：
+
 ![这里写图片描述](https://img-blog.csdn.net/20180527231840149?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1NvbmdfNzQxMTA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+
 你看，Git创建一个分支很快，因为除了增加一个dev指针，改改HEAD的指向，工作区的文件都没有任何变化！
 
 不过，从现在开始，对工作区的修改和提交就是针对dev分支了，比如新提交一次后，dev指针往前移动一步，而master指针不变：
+
 ![这里写图片描述](https://img-blog.csdn.net/20180527231916873?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1NvbmdfNzQxMTA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+
 假如我们在dev上的工作完成了，就可以把dev合并到master上。Git怎么合并呢？最简单的方法，就是直接把master指向dev的当前提交，就完成了合并：
+
 ![这里写图片描述](https://img-blog.csdn.net/20180527231949110?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1NvbmdfNzQxMTA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+
 所以Git合并分支也很快！就改改指针，工作区内容也不变！
 
 合并完分支后，甚至可以删除dev分支。删除dev分支就是把dev指针给删掉，删掉后，我们就剩下了一条master分支：
+
 ![这里写图片描述](https://img-blog.csdn.net/20180527232037761?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1NvbmdfNzQxMTA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+
 真是太神奇了，你看得出来有些提交是通过分支完成的吗？
 下面开始实战。
 
@@ -1015,7 +1039,9 @@ $ git checkout master
 Switched to branch 'master'
 ```
 切换回master分支后，再查看一个readme.txt文件，刚才添加的内容不见了！因为那个提交是在dev分支上，而master分支此刻的提交点并没有变：
+
 ![这里写图片描述](https://img-blog.csdn.net/20180527232320978?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1NvbmdfNzQxMTA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+
 现在，我们把dev分支的工作成果合并到master分支上：
 
 ```
@@ -1109,7 +1135,9 @@ $ git commit -m "& simple"
  1 file changed, 1 insertion(+), 1 deletion(-)
 ```
 现在，master分支和feature1分支各自都分别有新的提交，变成了这样：
+
 ![这里写图片描述](https://img-blog.csdn.net/20180528000923625?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1NvbmdfNzQxMTA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+
 这种情况下，Git无法执行“快速合并”，只能试图把各自的修改合并起来，但这种合并就可能会有冲突，我们试试看：
 
 ```
@@ -1163,7 +1191,9 @@ $ git commit -m "conflict fixed"
 [master cf810e4] conflict fixed
 ```
 现在，master分支和feature1分支变成了下图所示：
+
 ![这里写图片描述](https://img-blog.csdn.net/20180528001132180?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1NvbmdfNzQxMTA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+
 用带参数的git log也可以看到分支的合并情况：
 
 ```
@@ -1248,7 +1278,9 @@ $ git log --graph --pretty=oneline --abbrev-commit
 ```
 可以看到，不使用Fast forward模式，merge后就像这样：
 
+
 ![](https://img-blog.csdn.net/20180528001546863?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1NvbmdfNzQxMTA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+
 **分支策略**
 在实际开发中，我们应该按照几个基本原则进行分支管理：
 
@@ -1259,7 +1291,9 @@ $ git log --graph --pretty=oneline --abbrev-commit
 你和你的小伙伴们每个人都在dev分支上干活，每个人都有自己的分支，时不时地往dev分支上合并就可以了。
 
 所以，团队合作的分支看起来就像这样：
+
 ![这里写图片描述](https://img-blog.csdn.net/20180528001650886?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1NvbmdfNzQxMTA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+
 
 * 小结
 
@@ -1988,7 +2022,7 @@ To github.com:michaelliao/learngit.git
 
 但是在GitHub上，利用Git极其强大的克隆和分支功能，广大人民群众真正可以第一次自由参与各种开源项目了。
 
-如何参与一个开源项目呢？比如人气极高的bootstrap项目，这是一个非常强大的CSS框架，你可以访问它的项目主页https://github.com/twbs/bootstrap，点“Fork”就在自己的账号下克隆了一个bootstrap仓库，然后，从自己的账号下clone：
+如何参与一个开源项目呢？比如人气极高的bootstrap项目，这是一个非常强大的CSS框架，你可以访问它的项目主页 https://github.com/twbs/bootstrap， 点“Fork”就在自己的账号下克隆了一个bootstrap仓库，然后，从自己的账号下clone：
 
 ```
 git clone git@github.com:michaelliao/bootstrap.git
@@ -1997,12 +2031,14 @@ git clone git@github.com:michaelliao/bootstrap.git
 一定要从自己的账号下clone仓库，这样你才能推送修改。如果从bootstrap的作者的仓库地址git@github.com:twbs/bootstrap.git克隆，因为没有权限，你将不能推送修改。
 
 Bootstrap的官方仓库twbs/bootstrap、你在GitHub上克隆的仓库my/bootstrap，以及你自己克隆到本地电脑的仓库，他们的关系就像下图显示的那样：
+
 ![这里写图片描述](https://cdn.liaoxuefeng.com/cdn/files/attachments/001384926554932eb5e65df912341c1a48045bc274ba4bf000/0)
+
 如果你想修复bootstrap的一个bug，或者新增一个功能，立刻就可以开始干活，干完后，往自己的仓库推送。
 
 如果你希望bootstrap的官方库能接受你的修改，你就可以在GitHub上发起一个pull request。当然，对方是否接受你的pull request就不一定了。
 
-如果你没能力修改bootstrap，但又想要试一把pull request，那就Fork一下我的仓库：https://github.com/michaelliao/learngit，创建一个your-github-id.txt的文本文件，写点自己学习Git的心得，然后推送一个pull request给我，我会视心情而定是否接受。
+如果你没能力修改bootstrap，但又想要试一把pull request，那就Fork一下我的仓库：https://github.com/michaelliao/learngit， 创建一个your-github-id.txt的文本文件，写点自己学习Git的心得，然后推送一个pull request给我，我会视心情而定是否接受。
 
 *  小结
 
@@ -2131,7 +2167,7 @@ git push gitee master
     │ Local Repo  │
     └─────────────┘
 ```
-码云也同样提供了Pull request功能，可以让其他小伙伴参与到开源项目中来。你可以通过Fork我的仓库：https://gitee.com/liaoxuefeng/learngit，创建一个your-gitee-id.txt的文本文件，
+码云也同样提供了Pull request功能，可以让其他小伙伴参与到开源项目中来。你可以通过Fork我的仓库：https://gitee.com/liaoxuefeng/learngit， 创建一个your-gitee-id.txt的文本文件，
 写点自己学习Git的心得，然后推送一个pull request给我，这个仓库会在码云和GitHub做双向同步。
 
 ## 忽略特殊文件
@@ -2297,7 +2333,9 @@ git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Crese
 ```
 
 来看看git lg的效果：
+
 ![这里写图片描述](https://cdn.liaoxuefeng.com/cdn/files/attachments/00138492662982594cbd1a942114472aeeb5f0a502faed1000/0)
+
 为什么不早点告诉我？别激动，咱不是为了多记几个英文单词嘛！
 
 **配置文件**
@@ -2441,7 +2479,7 @@ Git虽然极其强大，命令繁多，但常用的就那么十来个，掌握�
 
 [Git Cheat Sheet](https://pan.baidu.com/s/1S2sNSWC23kU4uM1jAsiPBA)
 
-现在告诉你Git的官方网站：http://git-scm.com，英文自我感觉不错的童鞋，可以经常去官网看看。什么，打不开网站？相信我，我给出的绝对是官网地址，而且，Git官网决没有那么容易宕机，可能是你的人品问题，赶紧面壁思过，好好想想原因。
+现在告诉你Git的官方网站：http://git-scm.com， 英文自我感觉不错的童鞋，可以经常去官网看看。什么，打不开网站？相信我，我给出的绝对是官网地址，而且，Git官网决没有那么容易宕机，可能是你的人品问题，赶紧面壁思过，好好想想原因。
 
 如果你学了Git后，工作效率大增，有更多的空闲时间健身看电影，那我的教学目标就达到了。
 
